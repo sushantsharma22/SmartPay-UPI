@@ -1,29 +1,39 @@
 """
-config.py
-Configuration constants for the UPI-like system.
+Configuration constants for SmartPay-UPI Canada.
 """
 
 import os
 
-# Paths to CSV files
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-USER_CSV = os.path.join(BASE_DIR, "users.csv")
-BANK_CSV = os.path.join(BASE_DIR, "bank_accounts.csv")
-TRANS_CSV = os.path.join(BASE_DIR, "transactions.csv")
+# CSV file paths
+USER_CSV = "users.csv"
+BANK_CSV = "banks.csv"
+TRANS_CSV = "transactions.csv"
+BILL_CSV = "bills.csv"
+BUDGET_CSV = "budget.csv"
+REWARDS_CSV = "rewards.csv"
+VIRTUAL_CARDS_CSV = "virtual_cards.csv"
 
-# CSV Headers
-USER_HEADERS = ["username", "password"]   # Removed KYC doc to simplify
+# CSV headers
+USER_HEADERS = ["username", "password", "role", "email", "full_name", "phone"]
 BANK_HEADERS = ["username", "account_number", "bank_name", "balance"]
-TRANS_HEADERS = ["timestamp", "from_account", "to_account", "amount", "status"]
+TRANS_HEADERS = ["timestamp", "from_account", "to_account", "amount", "status", "category"]
+BILL_HEADERS = ["username", "bill_name", "amount", "due_date", "frequency", "status"]
+BUDGET_HEADERS = ["username", "category", "monthly_limit"]
+REWARDS_HEADERS = ["username", "points"]
+VIRTUAL_CARD_HEADERS = ["username", "card_number", "expiry", "linked_account"]
 
-# Directory to store QR codes
-QR_CODES_DIR = os.path.join(BASE_DIR, "qr_codes")
+QR_CODES_DIR = "qr_codes"
 if not os.path.exists(QR_CODES_DIR):
     os.makedirs(QR_CODES_DIR)
 
-# If bcrypt is installed, we use it to hash passwords
-try:
-    import bcrypt
-    USE_BCRYPT = True
-except ImportError:
-    USE_BCRYPT = False
+USE_BCRYPT = True  # Toggle if bcrypt is not installed
+
+# Transaction / System Config
+DAILY_LIMIT = 5000.0
+STATEMENT_DAYS = 30
+
+# Email
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587
+EMAIL_SENDER = "donotreply.smartpayupi@gmail.com"
+EMAIL_PASSWORD = "keyq tbri twgy btyw"
