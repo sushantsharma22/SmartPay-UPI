@@ -2,7 +2,7 @@
 main.py
 Now uses a clean menu. If role == 'admin', we call admin_menu() from admin.py.
 """
-
+#fields
 import urllib.parse
 from csv_db import initialize_csv_files
 from user import register_user, login_user, reset_password
